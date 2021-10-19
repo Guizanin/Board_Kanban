@@ -1,0 +1,86 @@
+.App {
+  text-align: center;
+}
+body {
+  background: #f2f2f2;
+}
+header {
+  background: #222;
+  color: white;
+  margin-bottom: 20px;
+}
+header h2 {
+  margin: 0;
+  padding: 12px;
+  text-align: center;
+}
+
+main {
+  padding: 0 30px;
+  width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+main .content-kamban {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-kamban .top {
+  text-align: center;
+  background: #111;
+  color: #f2f2f2;
+  padding: 4px 0;
+  margin: 0;
+}
+.content-kamban .top.ToDo {
+  background: rgb(94, 99, 97);
+  color: #f2f2f2;
+}
+.content-kamban .top.InProgress {
+  background: rgb(0, 197, 105);
+  color: #f2f2f2;
+}
+.content-kamban .top.Done {
+  background: rgb(3, 114, 241);
+  color: #f2f2f2;
+}
+.content-kamban .box {
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 #00000020;
+  margin-top: 20px;
+  border: none;
+  padding: 12px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.content-kamban button {
+  border-radius: 50px;
+  border: none;
+  font-size: 18px;
+  width: 20px;
+  height: 20px;
+  margin: 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.content-kamban button:active {
+  background: #222;
+  color: #f2f2f2;
+}
+.content-kamban button:disabled {
+  opacity: 0.6;
+  cursor: inherit;
+}
+.content-kamban .content-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
