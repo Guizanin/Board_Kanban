@@ -1,6 +1,15 @@
-# Project in development...
+# Development using the next
 
-### by: Guilherme Zanin
+Development using the stacks React with Class Component. How is a basic r
+
+## Link Vercel to view the project runing
+
+[Go to vercel](https://board-kanban.vercel.app/)
+
+### npm start
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 <!-- # Getting Started with Create React App
 

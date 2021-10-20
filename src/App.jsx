@@ -2,33 +2,29 @@ import React, { Component } from "react";
 import "./App.css";
 
 const labels = ["Backlog", "To Do", "In Progress", "Done"];
-const cardsTasks = [
-  { name: "task 1", stage: 0 },
-  { name: "task 2", stage: 0 },
-  { name: "task 3", stage: 0 },
-  { name: "task 4", stage: 1 },
-  { name: "task 5", stage: 2 },
-  { name: "task 6", stage: 2 },
-  { name: "task 7", stage: 2 },
-  { name: "task 8", stage: 0 },
-  { name: "task 9", stage: 3 },
-  { name: "task 10", stage: 3 },
-];
+
 export default class App extends Component {
   state = {
-    tasks: cardsTasks,
+    tasks: [
+      { name: "task 1", stage: 0 },
+      { name: "task 2", stage: 0 },
+      { name: "task 3", stage: 0 },
+      { name: "task 4", stage: 1 },
+      { name: "task 5", stage: 2 },
+      { name: "task 6", stage: 2 },
+      { name: "task 7", stage: 2 },
+      { name: "task 8", stage: 0 },
+      { name: "task 9", stage: 3 },
+      { name: "task 10", stage: 3 },
+    ],
     organizedTask: [],
   };
   componentDidMount() {
-    this.pagedTasks();
+    this.pagedTasks(this.state.tasks);
   }
   // FIXME: function responsabled for to pagened the task state
-  pagedTasks = () => {
-    this.setState({
-      tasks: cardsTasks,
-    });
-    console.log("tasksss", this.state.tasks);
-    const paginedTasks = this.state.tasks.reduce((acc, item) => {
+  pagedTasks = (arrayTasks) => {
+    const paginedTasks = arrayTasks.reduce((acc, item) => {
       const group = item.stage;
       acc[group] = [...(acc[group] || []), item];
       return acc;
@@ -39,7 +35,6 @@ export default class App extends Component {
   };
   // FIXME: function responsable for value update in selected itemTask
   updateClickedTask = (operation, oldTask) => {
-    console.log("old", oldTask);
     const typeUpdate =
       operation === "prev" ? oldTask.stage - 1 : oldTask.stage + 1;
     const newTask = { ...oldTask, stage: typeUpdate };
@@ -48,17 +43,16 @@ export default class App extends Component {
 
   // FIXME: function responsable for update in task state
   updateStateTasks = (oldStateTasks, taskUpdated, indexTask) => {
-    console.log("oldStateTasks", oldStateTasks);
-    console.log("taskUpdated", taskUpdated);
     const newStateTask = oldStateTasks.reduce((acc, item, index) => {
-      index !== indexTask && (acc = [...acc, item]);
+      index === indexTask
+        ? (acc = [...acc, taskUpdated])
+        : (acc = [...acc, item]);
       return acc;
     }, []);
-    console.log("new", newStateTask);
     this.setState({
-      tasks: [],
+      tasks: newStateTask,
     });
-    this.pagedTasks();
+    this.pagedTasks(newStateTask);
   };
 
   handleClick = (typeOperation, task) => {
@@ -75,8 +69,9 @@ export default class App extends Component {
     return (
       <>
         <header>
-          <h2>Quadro Kamban</h2>
+          <h2>Board Kanban</h2>
         </header>
+
         <main>
           {labels.map((itemLabel, indexLabel) => (
             <div
@@ -110,28 +105,27 @@ export default class App extends Component {
                           }
                           onClick={() => this.handleClick("next", tasksItem)}
                         >
-                          &#8658;{" "}
+                          &#8658;
                         </button>
                       </div>
                     </div>
                   )
                 )}
-              {/* {this.state.tasks[indexLabel].map((tasksItem, indexTasks) => (
-                <div className="box" key={indexTasks}>
-                  <span>{tasksItem.name}</span>
-                  <div className="content-buttons">
-                    <button className="btn-prev">
-                      {" "}
-                      &#8656; onClick=
-                      {() => this.handleClick("prev", tasksItem.name)}
-                    </button>
-                    <button className="btn-next"> &#8658; </button>
-                  </div>
-                </div>
-              ))} */}
             </div>
           ))}
         </main>
+        <h4
+          style={{
+            position: "absolute",
+            bottom: "10px",
+            width: "150px",
+            left: 0,
+            right: 0,
+            margin: "0 auto",
+          }}
+        >
+          by Guilherme Zanin
+        </h4>
       </>
     );
   }
